@@ -1,21 +1,34 @@
 #!/bin/bash
 
+msg_blue() {
+  printf "${blue}=>${bold} $1${all_off}\n"
+}
+
+note() {
+  printf "${blue}=>${yellow} NOTE:${bold} $1${all_off}\n"
+}
+
+all_off="$(tput sgr0)"
+bold="${all_off}$(tput bold)"
+blue="${blue}$(tput setaf 4)"
+yellow="${bold}$(tput setaf 3)"
+
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
-   echo -e "*** This script *MUST* be run as root. Prepend with sudo! ***" 1>&2
+   note "*** This script *MUST* be run as root. Prepend with sudo! ***" 1>&2
    exit 1
 fi
 
 # Check if dmidecode is installed
-hash dmidecode 2>/dev/null || { echo -e "*** This script requires that dmidecode is installed, please install it using your distro's package manager ***" 1>&2; exit 1; }
+hash dmidecode 2>/dev/null || { note "*** This script requires that dmidecode is installed, please install it using your distro's package manager ***" 1>&2; exit 1; }
 
-echo -e "(Re)installing xf86-input-cmt configuration files for: "
+msg_blue "(Re)installing xf86-input-cmt configuration files for: "
 
 # Determine model
 model=`dmidecode |grep -m1 "Product Name:" | awk '{print $3}'`
-echo "Product Name: $model"
+msg_blue "Product Name: $model"
 
-echo -e "Getting up to date configuration files"
+msg_blue "Getting up to date configuration files..."
 # Remove old conf files
 rm -f /etc/X11/xorg.conf.d/20-mouse.conf
 rm -f /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
@@ -26,6 +39,7 @@ curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/4
 ln -s /usr/share/xf86-input-cmt/20-mouse.conf /etc/X11/xorg.conf.d/20-mouse.conf
 ln -s /usr/share/xf86-input-cmt/40-touchpad-cmt.conf /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
 
+# Remove old conf files and resymlink. Curl tweaked conf files if they exist
 case $model in
 Aebl)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-aebl.conf
@@ -109,16 +123,17 @@ Zgb)
   ln -s /usr/share/xf86-input-cmt/50-touchpad-cmt-zgb.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-zgb.conf
   ;;
 *)
-  echo -e "Can't detect your device, not installing device specific configuration file"
-  echo -e "If you have a exynos, tegra or touchscreen device this may not have installed your configuration files correctly"
-  echo -e "See /usr/share/xf86-input-cmt/README for more information"
+  note "Can't detect your device, not installing device specific configuration file"
+  note "If you have a exynos, tegra or touchscreen device this may not have installed your configuration files correctly"
+  note "See /usr/share/xf86-input-cmt/README for more information"
   exit 1
   ;;
 esac
 
-echo "Finished"
 
-echo "REMEMBER to move any existing .conf files for use with xf86-input-synaptics out of /etc/X11/xorg.conf.d before rebooting"
-echo "For editing your touchpad configuration see here:"
-echo "https://github.com/hugegreenbug/distro-mods/blob/master/acerc720_common/usr/share/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf"
-echo "You can now delete this file."
+note "Move any existing .conf files for use with xf86-input-synaptics"
+note "out of /etc/X11/xorg.conf.d/ before rebooting."
+note "For editing your touchpad configuration see here as baseline:"
+note "'https://github.com/joebonrichie/xf86-input-cmt-conf/blob/master/50-touchpad-cmt-peppy.conf'\n"
+msg_blue "Finished"
+msg_blue "You can now delete this file"
