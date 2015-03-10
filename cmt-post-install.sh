@@ -93,6 +93,7 @@ Peppy)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf
   curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/50-touchpad-cmt-peppy.conf > /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf
   ln -s /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf
+  note "Your .conf file is already tweaked"
   ;;
 Pi)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-pi.conf
@@ -132,8 +133,6 @@ esac
 
 
 note "Move any existing .conf files for use with xf86-input-synaptics"
-note "out of /etc/X11/xorg.conf.d/ before rebooting."
-note "For editing your touchpad configuration see here as baseline:"
-note "'https://github.com/joebonrichie/xf86-input-cmt-conf/blob/master/50-touchpad-cmt-peppy.conf'\n"
+note "out of /etc/X11/xorg.conf.d/ before rebooting.\n"
 msg_blue "Finished"
-msg_blue "You can now delete this file"
+msg_blue "You can now delete this file and reboot to use xf86-input-cmt-xorg"
