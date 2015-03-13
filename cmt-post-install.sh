@@ -33,8 +33,8 @@ msg_blue "Getting up to date configuration files..."
 rm -f /etc/X11/xorg.conf.d/20-mouse.conf
 rm -f /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
 # Get updated conf files
-curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/20-mouse.conf > /usr/share/xf86-input-cmt/20-mouse.conf
-curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/40-touchpad-cmt.conf > /usr/share/xf86-input-cmt/40-touchpad-cmt.conf
+#curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/20-mouse.conf > /usr/share/xf86-input-cmt/20-mouse.conf
+#curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/40-touchpad-cmt.conf > /usr/share/xf86-input-cmt/40-touchpad-cmt.conf
 # Symlink to right place for Arch Linux
 ln -s /usr/share/xf86-input-cmt/20-mouse.conf /etc/X11/xorg.conf.d/20-mouse.conf
 ln -s /usr/share/xf86-input-cmt/40-touchpad-cmt.conf /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
@@ -91,9 +91,9 @@ Parrot)
   ;;
 Peppy)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf
-  curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/50-touchpad-cmt-peppy.conf > /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf
+  #curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/50-touchpad-cmt-peppy.conf > /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf
   ln -s /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf
-  note "Your .conf file is already tweaked"
+  #note "Your .conf file is already tweaked"
   ;;
 Pi)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-pi.conf
@@ -125,12 +125,11 @@ Zgb)
   ;;
 *)
   note "Can't detect your device, not installing device specific configuration file"
-  note "If you have a exynos, tegra or touchscreen device this may not have installed your configuration files correctly"
+  note "If you have a exynos or tegra device this may not have installed your configuration files correctly"
   note "See /usr/share/xf86-input-cmt/README for more information"
   exit 1
   ;;
 esac
-
 
 note "Move any existing .conf files for use with xf86-input-synaptics"
 note "out of /etc/X11/xorg.conf.d/ before rebooting.\n"
