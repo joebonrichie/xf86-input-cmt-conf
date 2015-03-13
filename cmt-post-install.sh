@@ -20,7 +20,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Check if dmidecode is installed
-hash dmidecode 2>/dev/null || { note "*** This script requires that dmidecode is installed, please install it using your distro's package manager ***" 1>&2; exit 1; }
+hash dmidecode 2>/dev/null || { note "*** This script requires that 'dmidecode' is installed. ***" 1>&2; exit 1; }
 
 msg_blue "(Re)installing xf86-input-cmt configuration files for: "
 
