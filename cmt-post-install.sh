@@ -18,28 +18,26 @@ if [[ $EUID -ne 0 ]]; then
    note "*** This script *MUST* be run as root. Prepend with sudo! ***" 1>&2
    exit 1
 fi
-
 # Check if dmidecode is installed
 hash dmidecode 2>/dev/null || { note "*** This script requires that 'dmidecode' is installed. ***" 1>&2; exit 1; }
 
+msg_blue "Running post install script..."
 msg_blue "(Re)installing xf86-input-cmt configuration files for: "
 
 # Determine model
 model=`dmidecode |grep -m1 "Product Name:" | awk '{print $3}'`
 msg_blue "Product Name: $model"
 
-msg_blue "Getting up to date configuration files..."
 # Remove old conf files
 rm -f /etc/X11/xorg.conf.d/20-mouse.conf
 rm -f /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
-# Get updated conf files
-#curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/20-mouse.conf > /usr/share/xf86-input-cmt/20-mouse.conf
-#curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/40-touchpad-cmt.conf > /usr/share/xf86-input-cmt/40-touchpad-cmt.conf
+
+
 # Symlink to right place for Arch Linux
 ln -s /usr/share/xf86-input-cmt/20-mouse.conf /etc/X11/xorg.conf.d/20-mouse.conf
 ln -s /usr/share/xf86-input-cmt/40-touchpad-cmt.conf /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
 
-# Remove old conf files and resymlink. Curl tweaked conf files if they exist
+# Symlink model specific .conf file
 case $model in
 Aebl)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-aebl.conf
@@ -91,9 +89,7 @@ Parrot)
   ;;
 Peppy)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf
-  #curl https://raw.githubusercontent.com/joebonrichie/xf86-input-cmt-conf/master/50-touchpad-cmt-peppy.conf > /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf
   ln -s /usr/share/xf86-input-cmt/50-touchpad-cmt-peppy.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-peppy.conf
-  #note "Your .conf file is already tweaked"
   ;;
 Pi)
   rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-pi.conf
@@ -133,5 +129,4 @@ esac
 
 note "Move any existing .conf files for use with xf86-input-synaptics"
 note "out of /etc/X11/xorg.conf.d/ before rebooting.\n"
-msg_blue "Finished"
-msg_blue "You can now delete this file and reboot to use xf86-input-cmt-xorg"
+msg_blue "Finished setting up configuration files\n"
