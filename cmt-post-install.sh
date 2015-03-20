@@ -127,6 +127,4 @@ Zgb)
   ;;
 esac
 
-note "Move any existing .conf files for use with xf86-input-synaptics"
-note "out of /etc/X11/xorg.conf.d/ before rebooting.\n"
 msg_blue "Finished setting up configuration files\n"
