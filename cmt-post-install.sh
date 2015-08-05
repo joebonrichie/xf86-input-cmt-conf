@@ -149,6 +149,19 @@ install() {
 
     msg_blue "Adding user to input group"
     usermod -a -G input $USER
+
+    msg_blue "Finished setting up configuration files."
+}
+
+remove() {
+    #gpasswd -d $USER input
+    #msg_blue "Removed current user from input group"
+    rm -f /etc/X11/xorg.conf.d/20-mouse.conf
+    rm -f /etc/X11/xorg.conf.d/20-touchscreen.conf
+    rm -f /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
+    rm -f /etc/X11/xorg.conf.d/50-touchpad-cmt-*
+    rm -f /etc/X11/xorg.conf.d/60-touchpad-cmt-*
+    msg_blue "xf86-input-cmt onfiguration files removed"
 }
 
 case "$1" in
@@ -156,10 +169,11 @@ case "$1" in
         setup
         install
         ;;
+    [R,r]emove)
+        remove
+        ;;
     *)
-        msg_blue "Usage: cmt-post-install install|remove"
+        msg_blue "Usage: sudo cmt-post-install install|remove"
         exit 1
         ;;
      esac
-
-msg_blue "Finished setting up configuration files"
