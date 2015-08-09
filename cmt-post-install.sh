@@ -147,8 +147,8 @@ install() {
        ;;
     esac
 
-    msg_blue "Adding user to input group"
-    usermod -a -G input $USER
+    #msg_blue "Adding user to input group"
+    #usermod -a -G input $USER
 
     msg_blue "Finished setting up configuration files."
 }
