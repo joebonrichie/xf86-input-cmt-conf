@@ -37,6 +37,7 @@ install() {
     ln -sf /usr/share/xf86-input-cmt/40-touchpad-cmt.conf /etc/X11/xorg.conf.d/40-touchpad-cmt.conf
 
     # Symlink model specific .conf file
+    # These aren't guaranteed to be correct 
     case $model in
     Aebl)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-aebl.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-aebl.conf
@@ -53,8 +54,14 @@ install() {
     Candy)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-candy.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-candy.conf
       ;;
+    Celes)
+      ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-celes.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-celes.conf
+      ;;
     Clapper)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-clapper.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-clapper.conf
+      ;;
+    Cyan)
+      ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-cyan.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-cyan.conf
       ;;
     Daisy)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-daisy.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-daisy.conf
@@ -71,11 +78,17 @@ install() {
     Falco)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-falco.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-falco.conf
       ;;
+    Gandof)
+      ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-gandof.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-gandof.conf
+      ;;
     Glimmer)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-glimmer.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-glimmer.conf
       ;;
     Gnawty)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-gnawty.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-gnawty.conf
+      ;;
+    Heli)
+      ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-heli.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-heli.conf
       ;;
     Kaen)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-kaen.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-kaen.conf
@@ -89,11 +102,17 @@ install() {
     Link)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-link.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-link.conf
       ;;
+    Lulu)
+      ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-lulu.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-lulu.conf
+      ;;
     Lumpy)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-lumpy.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-lumpy.conf
       ;;
     Mario)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-mario.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-mario.conf
+      ;;
+    Orco)
+      ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-orco.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-orco.conf
       ;;
     Parrot)
       ln -sf /usr/share/xf86-input-cmt/50-touchpad-cmt-parrot.conf /etc/X11/xorg.conf.d/50-touchpad-cmt-parrot.conf
