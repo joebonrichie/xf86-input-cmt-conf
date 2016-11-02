@@ -26,7 +26,7 @@ msg_blue "Running post install script..."
 msg_blue "(Re)installing xf86-input-cmt configuration files for: "
 
 # Determine model
-model=`dmidecode |grep -m1 "Product Name:" | awk '{print $3}'`
+model=`dmidecode -s system-product-name | awk '{print tolower($1)}'`
 msg_blue "Product Name: $model"
 
 if [ -z "model" ]
